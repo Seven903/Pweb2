@@ -1,44 +1,68 @@
-function addlinha() {
-  let tabela = document.querySelector(`#infoTable`);
-  let novalinha = document.createElement(`tr`);
-  let nome = document.createElement(`td`);
-  nome.innerHTML = `João`;
-  let idade = document.createElement(`td`);
-  idade.innerHTML = 25;
-  novalinha.appendChild(nome);
-  novalinha.appendChild(idade);
-  tabela.appendChild(novalinha);
+async function secao1() {
+  fetch(`https://cdn.apicep.com/file/apicep/06233-030.json`)
+    .then((resposta) => {
+      if (resposta.status !== 200) {
+        throw new Error(`not found`);
+      }
+      return resposta.json();
+    })
+    .then((obj) => {
+      console.log(obj);
+      let p = document.querySelector(`#section1 p`);
+      p.innerHTML = `Cep: ${obj.code}, Estado: ${obj.state}, Localidade: ${obj.city}, Endereço: ${obj.address}`;
+    })
+    .catch((erro) => console.log(erro));
 }
-function atualizacont() {
-  let conteudo = document.querySelector(`#content`);
-  let novoh2 = document.querySelector(`h2`);
-  novoh2.innerHTML = `Conteúdo atualizado`;
-  let criap = document.createElement(`p`);
-  criap.innerHTML = `Este e um novo paragrafo`;
-  conteudo.insertBefore(criap, novoh2.nextSibling);
-}
-function mudarestilo() {
-  let link = document.querySelector(`#myLink`);
+secao1();
 
-  link.style.color = `red`;
-  link.style.textDecoration = `none`;
-  link.addEventListener(`mouseout`, () => {
-    link.style.color = `blue`;
-  });
+async function secao2() {
+  fetch("https://reqres.in/api/users/12")
+    .then((res) => {
+      if (res.status !== 200) {
+        throw new Error(`not found`);
+      }
+      return res.json();
+    })
+    .then((obj) => {
+      console.log(obj);
+      let p2 = document.querySelector(`#section2 p`);
+      p2.innerHTML = `Usuario: ${obj.data.first_name} ${obj.data.last_name},   Email: ${obj.data.email}`;
+    })
+    .catch((erro) => console.log("Erro capturado:", erro));
 }
+secao2();
 
-function adcnovobloco() {
-  let conteudo = document.querySelector(`#content`);
-  let novadiv = document.createElement(`div`);
-  novadiv.setAttribute(`id`, `novadiv`);
-  conteudo.appendChild(novadiv);
-  let conteudonovadiv = document.createElement(`p`);
-  conteudonovadiv.innerHTML = `Este texto esta dentro da nova div`;
-  novadiv.appendChild(conteudonovadiv);
+async function secao3() {
+  fetch(`https://dummyjson.com/products/1`)
+    .then((res) => {
+      if (res.status !== 200) {
+        throw new Error(`not found`);
+      }
+      return res.json();
+    })
+    .then((obj) => {
+      console.log(obj);
+      let p3 = document.querySelector(`#section3 p`);
+      p3.innerHTML = `Nome do produto: ${obj.title}, Categoria: ${obj.category},
+        preço: ${obj.price}`;
+    })
+    .catch((erro) => console.log(`Erro: ${erro}`));
 }
+secao3();
 
-function removepara() {
-  let div = document.querySelector(`#content`);
-  let p = document.querySelector(`p`);
-  div.removeChild(p);
+async function secao4() {
+  fetch(`https://dummyjson.com/products/16`)
+    .then((res) => {
+      if (res.status !== 200) {
+        throw new Error(`not found`);
+      }
+      return res.json();
+    })
+    .then((obj) => {
+      console.log(obj);
+      let p4 = document.querySelector(`#section4 p`);
+      p4.innerHTML = `Nome do produto: ${obj.title}, Categoria: ${obj.category}, Preço: ${obj.price}`;
+    })
+    .catch((erro) => console.log(`Erro: ${erro}`));
 }
+secao4();
