@@ -4,7 +4,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 header {
   background-color: #5e00da;
   color: white;
@@ -88,4 +87,13 @@ button:hover {
   transform: scale(1.05);
 }#prazo{
   font-size: 16px;
+}#num{
+  color: black;
+}#pop{
+  text-align: center;
+  background: rgb(35, 19, 73);
+  color: rgb(223, 222, 222);
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px 5px rgba(0, 0, 0, 0.445);
+  
 }
