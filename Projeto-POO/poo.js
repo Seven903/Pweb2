@@ -71,32 +71,51 @@ class TarefaRevisao extends Tarefa {
 }
 
 let listaTarefas = [];
+function atualizarPlaceholder() {
+  const tipo = document.getElementById("tipo").value;
+  const numInput = document.getElementById("num");
 
+  if (tipo === "teorica") {
+    numInput.placeholder = "Número de Páginas";
+  } else if (tipo === "pratica") {
+    numInput.placeholder = "Número de Exercícios";
+  } else if (tipo === "revisao") {
+    numInput.placeholder = "Número de Revisões";
+  }
+}
 function adicionarTarefa() {
   const titulo = document.getElementById("titulo").value;
   const descricao = document.getElementById("descricao").value;
   const prazo = document.getElementById("prazo").value;
   const disciplina = document.getElementById("disciplina").value;
   const tipo = document.getElementById("tipo").value;
+  const num = document.getElementById("num").value;
+
+
+  if (!titulo || !descricao || !prazo || !disciplina || !num) {
+    alert("Por favor, preencha todos os campos!");
+    return;
+  }
 
   let novaTarefa;
 
+ 
   if (tipo === "teorica") {
-    novaTarefa = new TarefaTeorica(titulo, descricao, prazo, disciplina, 3);
+    novaTarefa = new TarefaTeorica(titulo, descricao, prazo, disciplina, num);
   } else if (tipo === "pratica") {
-    novaTarefa = new TarefaPratica(titulo, descricao, prazo, disciplina, 1);
-  } else {
-    novaTarefa = new TarefaRevisao(titulo, descricao, prazo, disciplina, 2);
+    novaTarefa = new TarefaPratica(titulo, descricao, prazo, disciplina, num);
+  } else if (tipo === "revisao") {
+    novaTarefa = new TarefaRevisao(titulo, descricao, prazo, disciplina, num);
   }
 
-  listaTarefas.push(novaTarefa);
+  listaTarefas.push(novaTarefa); 
   exibirTarefas();
   limparCampos();
 }
 
 function exibirTarefas() {
   const listaTarefasDiv = document.getElementById("listaTarefas");
-  listaTarefasDiv.innerHTML = "";
+  listaTarefasDiv.innerHTML = ""; 
 
   listaTarefas.forEach((tarefa, indice) => {
     const tarefaItem = document.createElement("div");
@@ -126,6 +145,8 @@ function limparCampos() {
   document.getElementById("prazo").value = "";
   document.getElementById("disciplina").value = "";
   document.getElementById("tipo").value = "teorica";
+  document.querySelector("#num").value = undefined;
+  atualizarPlaceholder()
 }
 
 function parabens() {
